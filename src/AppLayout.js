@@ -1,20 +1,19 @@
 import React from "react";
 import {NavLink, Route, Routes} from "react-router-dom";
-import RoomsCreate from "./movie/RoomsCreate";
+import RoomsCreate from "./room/RoomsCreate";
 import Rooms from "./routes/Rooms";
 import Movie from "./routes/Movie";
 import Show from "./routes/Show";
 import MovieCreate from "./movie/MovieCreate";
-import ShowCreate from "./movie/ShowCreate";
-import RoomsUpdate from "./movie/RoomsUpdate";
+import ShowCreate from "./show/ShowCreate";
+import RoomsUpdate from "./room/RoomsUpdate";
 import MovieUpdate from "./movie/MovieUpdate";
-import ShowUpdate from "./movie/ShowUpdate";
-import Buy from "./movie/Buy";
-import Ticket from "./movie/Ticket";
+import ShowUpdate from "./show/ShowUpdate";
+import Buy from "./ticket/Buy";
+import Ticket from "./ticket/Ticket";
 
 function AppLayout(props) {
     const {
-        database,
         addRoom,
         addMovie,
         addShow,
@@ -52,30 +51,32 @@ function AppLayout(props) {
                </div>
            </nav>
            </header>
+
            <div className={'container-fluid'}>
                <div className={'row'}>
                    <main className={'col mt-3'}>
+
                            <Routes>
-                               <Route path={'/'} element={<Rooms database={database} />} />
-                               <Route path="/rooms" element={<Rooms database={database} removeRoom={removeRoom} updateRoom={updateRoom} />} />
-                               <Route path="/rooms/create" element={<RoomsCreate database={database} addRoom={addRoom}/>} />
-                                <Route path="/movie" element={<Movie database={database} removeMovie={removeMovie} />} />
-                               <Route path="/movie/create" element={<MovieCreate database={database} addMovie={addMovie} />} />
-                               <Route path="/show" element={<Show database={database} addShow={addShow} removeShow={removeShow} />} />
-                               <Route path="/show/create" element={<ShowCreate  database={database} addShow={addShow} />} />
-                               <Route path="/rooms/update/:roomID" element={<RoomsUpdate database={database} updateRoom={updateRoom} />} />
-                               <Route path="/movie/update/:movieID" element={<MovieUpdate database={database} updateMovie={updateMovie} />} />
-                               <Route path="/show/update/:showID" element={<ShowUpdate database={database} updateShow={updateShow} />} />
-                               <Route path="show/buy/:showID" element={<Buy database={database} addTicket={addTicket}/>} />
-                               <Route path="/show/:showID/ticket/:seatID" element={<Ticket database={database} addTicket={addTicket}/>} />
+                               <Route path={'/'} element={<Rooms />} />
+                               <Route path="/rooms" element={<Rooms removeRoom={removeRoom} />} />
+                               <Route path="/rooms/create" element={<RoomsCreate addRoom={addRoom}/>} />
+                               <Route path="/rooms/update/:roomID" element={<RoomsUpdate  updateRoom={updateRoom} />} />
+                               <Route path="/movie" element={<Movie removeMovie={removeMovie} />} />
+                               <Route path="/movie/create" element={<MovieCreate  addMovie={addMovie} />} />
+                               <Route path="/movie/update/:movieID" element={<MovieUpdate updateMovie={updateMovie} />} />
+                               <Route path="/show" element={<Show removeShow={removeShow} />} />
+                               <Route path="/show/create" element={<ShowCreate addShow={addShow} />} />
+                               <Route path="/show/update/:showID" element={<ShowUpdate updateShow={updateShow} />} />
+                               <Route path="show/buy/:showID" element={<Buy addTicket={addTicket}/>} />
+                               <Route path="/show/:showID/ticket/:seatID" element={<Ticket addTicket={addTicket}/>} />
                                <Route path="*" element={ <main style={{ padding: "1rem", fontSize:"20px" }}>
                                    <p>Brak żądanej strony!</p>
                                </main>} />
                            </Routes>
+
                    </main>
                </div>
            </div>
-
        </>
 );
 }

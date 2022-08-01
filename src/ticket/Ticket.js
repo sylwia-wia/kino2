@@ -1,14 +1,14 @@
 import {useParams} from "react-router-dom";
 import {getShowByID} from "../utils/Selectors";
-import {useEffect} from "react";
+import {useContext, useEffect} from "react";
+import {Context} from "../context/Context";
 
 
 export default function Ticket(props) {
     const {showID, seatID} = useParams();
-    const {database, addTicket} = props;
+    const {database} = useContext(Context);
      const show = getShowByID(database, showID);
 
-    //show.seats[seatID] = seatID;
     useEffect(() => {
         props.addTicket(showID, seatID);
     }, []);

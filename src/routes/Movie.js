@@ -3,10 +3,13 @@ import {Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {getMovies} from "../utils/Selectors";
 import {Pencil, Trash3} from "react-bootstrap-icons";
+import {useContext} from "react";
+import {Context} from "../context/Context";
 
 
 export default function Movie(props) {
-    const {database, removeMovie} = props;
+    const { removeMovie} = props;
+    const {database} = useContext(Context);
 
     function onClickRemoveHandler(movieID) {
         removeMovie(movieID);
@@ -35,7 +38,7 @@ export default function Movie(props) {
             </td>
         </tr>
     ));
-    console.log(database);
+
     return (
         <>
             <h2 className="px-3">Repertuar</h2>

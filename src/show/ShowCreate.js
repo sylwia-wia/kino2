@@ -1,16 +1,15 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import ShowForm from "./ShowForm";
+import {useContext} from "react";
+import {Context} from "../context/Context";
 
 
 export default function ShowCreate(props) {
-
-    const {database, addShow} = props;
+    const {database} = useContext(Context);
     const navigate = useNavigate();
 
-
     function onFormSubmitHandler(formData) {
-        console.log(formData);
         props.addShow(formData);
         navigate('/show');
     }

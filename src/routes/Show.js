@@ -1,24 +1,23 @@
-import React, {useState, useRef} from "react";
+import React, {useState} from "react";
 import {Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import {getShows} from "../utils/Selectors";
-import {Pencil, Trash3} from "react-bootstrap-icons";
-import moment from "moment/moment";
-import FilteredShows from "../movie/FilteredShows";
+import FilteredShows from "../show/FilteredShows";
+import {useContext} from "react";
+import {Context} from "../context/Context";
 
 export default function Show(props) {
-    const {database, removeShow, showID} = props;
+    const {removeShow} = props;
     const [filteredMovies, setFilteredMovies] = useState('');
-    const [filterShow, setFilterShow] = useState({});
+    const {database} = useContext(Context);
+    // console.log(database);
 
-    console.log(filteredMovies);
     let filterByMovie;
 
     const shows = {...database.shows};
-    Object.values(shows).filter(movieTitle => console.log(movieTitle.movie.movieTitle===filteredMovies));
+
+    Object.values(shows).filter(movieTitle => movieTitle.movie.movieTitle===filteredMovies);
     if (filteredMovies) {
         const filteringMovies = Object.values(shows).filter(movieTitle => movieTitle.movie.movieTitle.toLowerCase().includes(filteredMovies.toLowerCase()));
-        console.log(filteringMovies);
         if (filteringMovies) {
             filterByMovie = [<FilteredShows key={filteredMovies} filterShow={filteringMovies} removeShow={removeShow}/>];
         } else {

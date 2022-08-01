@@ -1,4 +1,3 @@
-import {getShows} from "../utils/Selectors";
 import moment from "moment/moment";
 import {Link} from "react-router-dom";
 import {Pencil, Trash3} from "react-bootstrap-icons";
@@ -12,7 +11,6 @@ export default function FilteredShows(props) {
     }
 
     const rekordyTabeli = Object.values(filterShow).map((show, index) => {
-        console.log(show.movieTitle);
         const bgColor = moment().isAfter(show.startTime) && moment().isBefore(show.endTime) ? 'bg-warning' : '';
 
         return (

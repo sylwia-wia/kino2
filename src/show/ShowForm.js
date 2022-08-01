@@ -1,14 +1,16 @@
 import Datetime from "react-datetime";
 import React, {useState} from "react";
 import moment from "moment/moment";
+import 'moment/locale/pl';
 import {useForm, Controller} from "react-hook-form";
 
 export default function ShowForm(props) {
-    const {show, movies, rooms, shows} = props;
+    const {show, movies, rooms} = props;
     const isEditing = show !== undefined;
     const [movieID, setMovieID] = useState(isEditing ? show.movieID : '');
     const [roomID, setRoomID] = useState(isEditing  ? show.roomID : '');
-    const {register, handleSubmit, control, setValue, formState: { errors }} = useForm({criteriaMode:"all"});
+
+    const {register, handleSubmit, control, formState: { errors }} = useForm({criteriaMode:"all", defaultValues: {showDate: show.showDate }});
 
     function onSubmit(data) {
         props.onFormSubmitHandler({
@@ -30,6 +32,8 @@ export default function ShowForm(props) {
 
      const compareDate = (showDate) => {
         const nowDate = moment().format('YYYY-MM-DD HH:mm:ss');
+
+        moment(showDate).format('YYYY-MM-DD HH:mm:ss');
 
         if(showDate?.isAfter(nowDate)){
             return true;
@@ -63,11 +67,8 @@ export default function ShowForm(props) {
                     required
                     rules={showValidation.showDate}
                     render={({ field }) => (
-                        <Datetime
+                        <Datetime locale="pl"
                             {...field}
-
-
-
                         />
                     )}
                 />

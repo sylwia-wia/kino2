@@ -1,12 +1,13 @@
-import React, {useState} from "react";
+import React from "react";
 import {useNavigate} from "react-router-dom";
 import MovieForm from "./MovieForm";
+import {useContext} from "react";
+import {Context} from "../context/Context";
 
 export default function MovieCreate(props) {
     const navigate = useNavigate();
-    const {database} = props;
+    const {database} = useContext(Context);
     const {movies} = database;
-    console.log(database);
 
     function onFormSubmitHandler(formData) {
         props.addMovie(formData);

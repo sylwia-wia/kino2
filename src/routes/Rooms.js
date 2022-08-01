@@ -3,10 +3,13 @@ import {Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {getRooms} from "../utils/Selectors";
 import {Trash3, Pencil} from 'react-bootstrap-icons';
+import {useContext} from "react";
+import {Context} from "../context/Context";
 
 
 export default function Rooms(props) {
-    const {database, removeRoom} = props;
+    const { removeRoom} = props;
+    const {database } = useContext(Context);
 
     function onClickRemoveHandler(roomID) {
         removeRoom(roomID);

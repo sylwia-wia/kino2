@@ -18,7 +18,6 @@ export default function MovieForm(props) {
         onFormSubmitHandler(data);
     };
 
-    console.log(movies);
     const isExist = (movieTitle)  => {
         if(isEditing && movie.movieTitle === movieTitle) {
             return true;

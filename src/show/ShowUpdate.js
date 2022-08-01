@@ -2,10 +2,12 @@ import {useNavigate, useParams} from "react-router-dom";
 import {getShowByID} from "../utils/Selectors";
 import ShowForm from "./ShowForm";
 import React from "react";
+import {Context} from "../context/Context";
+import {useContext} from "react";
 
 export default function ShowUpdate(props) {
     const navigate = useNavigate();
-    const {database} = props;
+    const {database } = useContext(Context);
     const {showID} = useParams();
 
     const show = getShowByID(database, showID);
@@ -16,7 +18,6 @@ export default function ShowUpdate(props) {
         props.updateShow(formData.showID, formData);
          navigate('/show')
     }
-
 
     return (
         <>

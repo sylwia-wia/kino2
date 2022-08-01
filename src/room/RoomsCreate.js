@@ -1,9 +1,11 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import RoomForm from "./RoomForm";
+import {useContext} from "react";
+import {Context} from "../context/Context";
 
 export default function RoomsCreate(props) {
-    const {database} = props;
+    const {database} = useContext(Context);
 
     const navigate = useNavigate();
 

@@ -1,23 +1,20 @@
 import React from "react";
 import {getShowByID} from "../utils/Selectors";
 import {useParams} from "react-router-dom";
-import ShowDetail from "./ShowDetail";
+import ShowDetail from "../show/ShowDetail";
+import {useContext} from "react";
+import {Context} from "../context/Context";
 
 export default function Buy (props) {
-    const {database, addTicket} = props;
+    const {addTicket} = props;
+    const {database } = useContext(Context);
     const shows = database.shows;
-    console.log(database);
      const {showID} = useParams();
     const show = getShowByID(database, showID);
-    console.log(show);
 
     function onFormSubmitHandler(formData) {
         formData.showID = show.showID;
     }
-    console.log(database.shows);
-
-     const capacity = show.room.capacity;
-    console.log(capacity);
 
     return (
         <>

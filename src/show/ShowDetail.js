@@ -3,40 +3,22 @@ import "./ShowDetail.css";
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import {useNavigate, useParams} from "react-router-dom";
-import Ticket from "./Ticket";
-import React, {useState} from "react";
-
+import React from "react";
 
 export default function ShowDetail(props) {
     const {show} = props;
-    //const startTime = moment(show.showDate);
-   // const endTime = moment(show.showDate).add(show.movie.movieTime, 'minutes');
     const navigate = useNavigate();
     const {showID} = useParams();
 
-
-
- function handleSeatClick(seatID) {
-     console.log(show);
-
-     if (show.seats[seatID] !== null) {
-         return;
+    function handleSeatClick(seatID) {
+         if (show.seats[seatID] !== null) {
+             return;
      }
 
-
-// function handle() {
-//     props.addTicket(showID, seatID,show);
-//     navigate(`/show/${showID}/ticket/${seatID}`)
-// }
-
-
-
-
-     const confirm = {
-         title: 'Potwierdź zakup biletu',
-         message: 'Czy chcesz kupić bilet?',
-
-         buttons: [
+   const confirm = {
+             title: 'Potwierdź zakup biletu',
+            message: 'Czy chcesz kupić bilet?',
+            buttons: [
              {
                  label: 'Tak',
                  onClick: () => {
@@ -57,7 +39,6 @@ export default function ShowDetail(props) {
      confirmAlert(confirm);
  }
 
-    console.log(show);
      const seatCards = Object.keys(show.seats).map(seatID => {
          const bgColor = show.seats[seatID] !== null ? 'bg-secondary' : 'bg-success';
 
@@ -72,8 +53,6 @@ export default function ShowDetail(props) {
              </div>
          );
      });
-
-
 
     return (
         <>

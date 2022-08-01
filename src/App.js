@@ -1,20 +1,13 @@
 import './App.css';
 import AppLayout from "./AppLayout"
-import {useEffect, useState} from "react";
+import {useContext, useEffect } from "react";
 import {getMovieByID, getRoomByID} from "./utils/Selectors";
 import React from "react";
 import moment from "moment/moment";
+import {Context} from "./context/Context";
 
 function App() {
-
-    const [database, setDatabase] = useState(() => {
-        const restoredDatabase = JSON.parse(localStorage.getItem('database'));
-        return restoredDatabase || {
-            rooms: {},
-            movies: {},
-            shows: {},
-        }
-    });
+    const {database, setDatabase} = useContext(Context);
 
     useEffect(() => {
         localStorage.setItem('database', JSON.stringify(database));
@@ -46,13 +39,11 @@ function App() {
     }
 
     const removeShow = (showID) => {
-        console.log(showID);
         delete database.shows[showID];
         setDatabase({
             ...database
         });
     }
-
 
     const updateRoom = (roomID, data) => {
         setDatabase({
@@ -61,18 +52,18 @@ function App() {
                 ...database.rooms,
                 [roomID]: {...data}
             }
-
         });
     }
 
     const updateMovie = (movieID, data) => {
-        database.movies[movieID] = {...data};
-
         setDatabase({
-            ...database
+            ...database,
+            movies: {
+                ...database.movies,
+                [movieID]: {...data}
+            }
             });
-        }
-
+    }
 
     const updateShow = (showID, data) => {
         const show = {
@@ -130,7 +121,6 @@ function App() {
     }
 
     const addShow = (showData) => {
-
         const shows = {...database.shows};
         let id = 1;
         if (Object.keys(shows).length > 0) {
