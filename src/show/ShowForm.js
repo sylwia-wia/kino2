@@ -10,7 +10,7 @@ export default function ShowForm(props) {
     const [movieID, setMovieID] = useState(isEditing ? show.movieID : '');
     const [roomID, setRoomID] = useState(isEditing  ? show.roomID : '');
 
-    const {register, handleSubmit, control, formState: { errors }} = useForm({criteriaMode:"all", defaultValues: {showDate: show.showDate }});
+    const {register, handleSubmit, control, formState: { errors }} = useForm({criteriaMode:"all", defaultValues: {showDate: (isEditing ? show.showDate : '') }});
 
     function onSubmit(data) {
         props.onFormSubmitHandler({
